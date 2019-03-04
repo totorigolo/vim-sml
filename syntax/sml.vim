@@ -4,7 +4,8 @@
 " Maintainers:  Markus Mottl            <markus.mottl@gmail.com>
 "               Fabrizio Zeno Cornelli  <zeno@filibusta.crema.unimi.it>
 " URL:          http://www.ocaml.info/vim/syntax/sml.vim
-" Last Change:  2006 Oct 23 - Fixed character highlighting bug (MM)
+" Last Change:  2019        - 
+"               2006 Oct 23 - Fixed character highlighting bug (MM)
 "               2002 Jun 02 - Fixed small typo  (MM)
 "               2001 Nov 20 - Fixed small highlighting bug with modules (MM)
 
@@ -83,16 +84,16 @@ syn region   smlStruct matchgroup=smlModule start="\<struct\>" matchgroup=smlMod
 
 " "sig"
 syn region   smlSig matchgroup=smlModule start="\<sig\>" matchgroup=smlModule end="\<end\>" contains=ALLBUT,@smlContained,smlEndErr,smlModule
-syn region   smlModSpec matchgroup=smlKeyword start="\<structure\>" matchgroup=smlModule end="\<\u\(\w\|'\)*\>" contained contains=@smlAllErrs,smlComment skipwhite skipempty nextgroup=smlModTRWith,smlMPRestr
+syn region   smlModSpec matchgroup=smlKeyword start="\<structure\>" matchgroup=smlModule end="\<\w\(\w\|'\)*\>" contained contains=@smlAllErrs,smlComment skipwhite skipempty nextgroup=smlModTRWith,smlMPRestr
 
 " "open"
-syn region   smlNone matchgroup=smlKeyword start="\<open\>" matchgroup=smlModule end="\<\u\(\w\|'\)*\(\.\u\(\w\|'\)*\)*\>" contains=@smlAllErrs,smlComment
+syn region   smlNone matchgroup=smlKeyword start="\<open\>" matchgroup=smlModule end="\<\w\(\w\|'\)*\(\.\w\(\w\|'\)*\)*\>" contains=@smlAllErrs,smlComment
 
 " "structure" - somewhat complicated stuff ;-)
-syn region   smlModule matchgroup=smlKeyword start="\<\(structure\|functor\)\>" matchgroup=smlModule end="\<\u\(\w\|'\)*\>" contains=@smlAllErrs,smlComment skipwhite skipempty nextgroup=smlPreDef
+syn region   smlModule matchgroup=smlKeyword start="\<\(structure\|functor\)\>" matchgroup=smlModule end="\<\w\(\w\|'\)*\>" contains=@smlAllErrs,smlComment skipwhite skipempty nextgroup=smlPreDef
 syn region   smlPreDef start="."me=e-1 matchgroup=smlKeyword end="\l\|="me=e-1 contained contains=@smlAllErrs,smlComment,smlModParam,smlModTypeRestr,smlModTRWith nextgroup=smlModPreRHS
 syn region   smlModParam start="([^*]" end=")" contained contains=@smlAENoParen,smlModParam1
-syn match    smlModParam1 "\<\u\(\w\|'\)*\>" contained skipwhite skipempty nextgroup=smlPreMPRestr
+syn match    smlModParam1 "\<\w\(\w\|'\)*\>" contained skipwhite skipempty nextgroup=smlPreMPRestr
 
 syn region   smlPreMPRestr start="."me=e-1 end=")"me=e-1 contained contains=@smlAllErrs,smlComment,smlMPRestr,smlModTypeRestr
 
@@ -102,14 +103,14 @@ syn region   smlMPRestr2 start="\sfunctor\(\s\|(\)\="me=e-1 matchgroup=smlKeywor
 syn match    smlMPRestr3 "\w\(\w\|'\)*\(\.\w\(\w\|'\)*\)*" contained
 syn match    smlModPreRHS "=" contained skipwhite skipempty nextgroup=smlModParam,smlFullMod
 syn region   smlModRHS start="." end=".\w\|([^*]"me=e-2 contained contains=smlComment skipwhite skipempty nextgroup=smlModParam,smlFullMod
-syn match    smlFullMod "\<\u\(\w\|'\)*\(\.\u\(\w\|'\)*\)*" contained skipwhite skipempty nextgroup=smlFuncWith
+syn match    smlFullMod "\<\w\(\w\|'\)*\(\.\w\(\w\|'\)*\)*" contained skipwhite skipempty nextgroup=smlFuncWith
 
 syn region   smlFuncWith start="([^*]"me=e-1 end=")" contained contains=smlComment,smlWith,smlFuncStruct
 syn region   smlFuncStruct matchgroup=smlModule start="[^a-zA-Z]struct\>"hs=s+1 matchgroup=smlModule end="\<end\>" contains=ALLBUT,@smlContained,smlEndErr
 
 syn match    smlModTypeRestr "\<\w\(\w\|'\)*\(\.\w\(\w\|'\)*\)*\>" contained
 syn region   smlModTRWith start=":\s*("hs=s+1 end=")" contained contains=@smlAENoParen,smlWith
-syn match    smlWith "\<\(\u\(\w\|'\)*\.\)*\w\(\w\|'\)*\>" contained skipwhite skipempty nextgroup=smlWithRest
+syn match    smlWith "\<\(\w\(\w\|'\)*\.\)*\w\(\w\|'\)*\>" contained skipwhite skipempty nextgroup=smlWithRest
 syn region   smlWithRest start="[^)]" end=")"me=e-1 contained contains=ALLBUT,@smlContained
 
 " "signature"
@@ -133,10 +134,10 @@ syn keyword  smlBoolean      true false
 syn match    smlConstructor  "(\s*)"
 syn match    smlConstructor  "\[\s*\]"
 syn match    smlConstructor  "#\[\s*\]"
-syn match    smlConstructor  "\u\(\w\|'\)*\>"
+syn match    smlConstructor  "\w\(\w\|'\)*\>"
 
 " Module prefix
-syn match    smlModPath      "\u\(\w\|'\)*\."he=e-1
+syn match    smlModPath      "\w\(\w\|'\)*\."he=e-1
 
 syn match    smlCharacter    +#"\\""\|#"."\|#"\\\d\d\d"+
 syn match    smlCharErr      +#"\\\d\d"\|#"\\\d"+
